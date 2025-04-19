@@ -8,3 +8,5 @@
 008 - Eu vou clamar  | Adoração | 008 - Eu vou clamar.txt
 009 - O fogo ardera | Adoração | 009 - O fogo ardera.txt
 010 - É Ele | Adoração | 010 - É Ele.txt
+011 - Onde o fogo não apaga | Adoração | 011 - Onde o fogo não apaga.txt
+012 - Não seremos abalados | Adoração | 012 - Não seremos abalados.txt
