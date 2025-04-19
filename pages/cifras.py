@@ -2,24 +2,31 @@ import streamlit as st
 import os
 import pathlib
 
-# Caminho
-PASTA_CIFRAS = pathlib.Path(__file__).parent / "cifras"
+# Caminhos
+BASE_DIR = pathlib.Path(__file__).parent
+PASTA_CIFRAS = BASE_DIR / "cifras"
+ARQUIVO_LISTA = BASE_DIR / "lista.txt"
 os.makedirs(PASTA_CIFRAS, exist_ok=True)
 
-# Arquivos disponíveis
-arquivos = [f for f in os.listdir(PASTA_CIFRAS) if f.endswith(".txt")]
-titulos = [f.replace(".txt", "").replace("-", " ").title() for f in arquivos]
+# Categorias
+categorias = ["Clássico", "Libertação", "Festivo", "Oração", "Adoração"]
+cifras_por_categoria = {cat: [] for cat in categorias}
 
-if not arquivos:
-    st.warning("Nenhuma cifra encontrada na pasta 'cifras'. Adicione arquivos .txt.")
+# Verifica lista.txt
+if not ARQUIVO_LISTA.exists():
+    st.warning("Arquivo 'lista.txt' não encontrado.")
     st.stop()
 
-# Seleção
-st.markdown("###  Louvores Seleção")
-selecionada = st.selectbox("Escolha a música:", titulos)
-arquivo = arquivos[titulos.index(selecionada)]
+# Lê a lista
+with open(ARQUIVO_LISTA, "r", encoding="utf-8") as f:
+    for linha in f:
+        if "|" not in linha:
+            continue
+        titulo, categoria, arquivo = [x.strip() for x in linha.strip().split("|")]
+        if categoria in cifras_por_categoria:
+            cifras_por_categoria[categoria].append((titulo, arquivo))
 
-# Estilo HTML seguro para fundo escuro/claro
+# Estilo HTML (fundo adaptável)
 st.markdown("""
     <style>
         .cifra {
@@ -56,27 +63,43 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# Leitura do arquivo
-with open(PASTA_CIFRAS / arquivo, "r", encoding="utf-8") as f:
-    linhas = f.read().splitlines()
+# Página
+st.set_page_config(page_title="Cifras por Categoria", layout="wide")
+st.markdown("## 🎶 Cifras por Estilo")
 
-# Monta HTML com marcação leve
-html = ""
-for i, linha in enumerate(linhas):
-    linha = linha.strip()
+# Colunas por categoria
+colunas = st.columns(len(categorias))
+for i, cat in enumerate(categorias):
+    with colunas[i]:
+        st.markdown(f"### {cat}")
+        for titulo, arquivo in cifras_por_categoria[cat]:
+            if st.button(titulo, key=f"{cat}-{titulo}"):
+                st.session_state["cifra_selecionada"] = (titulo, arquivo)
 
-    if not linha or linha.startswith("//"):
-        html += "<br>"
-        continue
+# Exibe cifra selecionada com estilo HTML
+if "cifra_selecionada" in st.session_state:
+    titulo, arquivo = st.session_state["cifra_selecionada"]
+    st.markdown(f"---\n### 📄 {titulo}")
 
-    if linha.startswith("#"):
-        html += f'<div class="secao">{linha[1:].strip()}</div><br>'
-    elif linha.startswith(">"):
-        acorde = linha[1:].replace(" ", "&nbsp;")
-        html += f'<span class="acorde">{acorde}</span><br>'
-    else:
-        letra = linha.replace(" ", "&nbsp;")
-        html += letra + "<br>"
+    path = PASTA_CIFRAS / arquivo
+    if not path.exists():
+        st.error(f"Arquivo '{arquivo}' não encontrado na pasta 'cifras'.")
+        st.stop()
 
-# Exibir
-st.markdown(f'<div class="cifra">{html}</div>', unsafe_allow_html=True)
+    with open(path, "r", encoding="utf-8") as f:
+        linhas = f.read().splitlines()
+
+    # Processamento estilo visual
+    html = ""
+    for linha in linhas:
+        linha = linha.strip()
+        if not linha or linha.startswith("//"):
+            html += "<br>"
+        elif linha.startswith("#"):
+            html += f'<div class="secao">{linha[1:].strip()}</div><br>'
+        elif linha.startswith(">"):
+            html += f'<span class="acorde">{linha[1:].replace(" ", "&nbsp;")}</span><br>'
+        else:
+            html += linha.replace(" ", "&nbsp;") + "<br>"
+
+    st.markdown(f'<div class="cifra">{html}</div>', unsafe_allow_html=True)
