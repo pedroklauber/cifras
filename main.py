@@ -1,13 +1,12 @@
 import streamlit as st
 import os
 import pathlib
-import re
 
 # Caminho da pasta
 PASTA_CIFRAS = pathlib.Path(__file__).parent / "cifras"
 os.makedirs(PASTA_CIFRAS, exist_ok=True)
 
-# Arquivos
+# Lista de arquivos
 arquivos = [f for f in os.listdir(PASTA_CIFRAS) if f.endswith(".txt")]
 titulos = [f.replace(".txt", "").replace("-", " ").title() for f in arquivos]
 
@@ -16,37 +15,50 @@ if not arquivos:
     st.stop()
 
 # Seleção
-st.markdown("### 🎶 Cifras com alinhamento nota/letra no celular")
+st.markdown("### 🎶 Visualizador de Cifras com Marcação Inteligente")
 selecionada = st.selectbox("Escolha a música:", titulos)
 arquivo = arquivos[titulos.index(selecionada)]
 
-# Leitura do arquivo
+# Leitura
 with open(PASTA_CIFRAS / arquivo, "r", encoding="utf-8") as f:
     linhas = f.read().splitlines()
 
-# Detectar se é uma linha de acordes
-def linha_de_acordes(linha):
-    tokens = re.split(r'\s+', linha.strip())
-    return (
-        len(tokens) > 0 and
-        all(re.fullmatch(r'[A-G][#b]?(m|maj|min|sus|dim|aug|add)?\d*(/[A-G][#b]?)?', t) for t in tokens if t)
-    )
-
-# Montar blocos acordes + letra
+# Interpretação dos blocos
 blocos = []
 i = 0
 while i < len(linhas):
-    linha = linhas[i]
-    if linha_de_acordes(linha):
-        acorde = linha
-        letra = linhas[i+1] if i + 1 < len(linhas) and not linha_de_acordes(linhas[i+1]) else ""
-        blocos.append((acorde, letra))
-        i += 2 if letra else 1
-    else:
-        blocos.append(("", linha))  # linha solta de letra (ex: refrão)
-        i += 1
+    linha = linhas[i].strip()
 
-# Exibir blocos: nota acima, letra abaixo
-for acorde, letra in blocos:
-    bloco = f"{acorde}\n{letra}"
-    st.markdown(f"```text\n{bloco}\n```")
+    if not linha or linha.startswith("//"):  # ignora comentários e vazios
+        i += 1
+        continue
+
+    if linha.startswith("#"):  # título/seção
+        blocos.append(("SECAO", linha[1:].strip()))
+        i += 1
+        continue
+
+    if linha.startswith(">"):  # acorde + letra abaixo
+        acorde = linha[1:].rstrip()
+        letra = ""
+        if i + 1 < len(linhas):
+            prox = linhas[i + 1].strip()
+            if prox and not prox.startswith(">") and not prox.startswith("#") and not prox.startswith("//"):
+                letra = prox
+                i += 1
+        blocos.append(("BLOCO", acorde, letra))
+        i += 1
+        continue
+
+    # letra solta
+    blocos.append(("LETRA", linha))
+    i += 1
+
+# Exibição
+for bloco in blocos:
+    if bloco[0] == "SECAO":
+        st.markdown(f"**{bloco[1]}**")
+    elif bloco[0] == "BLOCO":
+        st.markdown(f"```text\n{bloco[1]}\n{bloco[2]}\n```")
+    elif bloco[0] == "LETRA":
+        st.markdown(f"`{bloco[1]}`")
