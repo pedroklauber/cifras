@@ -2,81 +2,92 @@ import streamlit as st
 import os
 import pathlib
 
-# Caminho
-PASTA_CIFRAS = pathlib.Path(__file__).parent / "cifras"
+# Caminho dos arquivos
+BASE_DIR = pathlib.Path(__file__).parent
+PASTA_CIFRAS = BASE_DIR / "cifras"
 os.makedirs(PASTA_CIFRAS, exist_ok=True)
 
-# Arquivos disponíveis
-arquivos = [f for f in os.listdir(PASTA_CIFRAS) if f.endswith(".txt")]
-titulos = [f.replace(".txt", "").replace("-", " ").title() for f in arquivos]
-
-if not arquivos:
-    st.warning("Nenhuma cifra encontrada na pasta 'cifras'. Adicione arquivos .txt.")
+ARQUIVO_LISTA = BASE_DIR / "lista.txt"
+if not ARQUIVO_LISTA.exists():
+    st.warning("Arquivo 'lista.txt' não encontrado.")
     st.stop()
 
-# Seleção
-st.markdown("### 🎶 Cifras com alinhamento contínuo")
-selecionada = st.selectbox("Escolha a música:", titulos)
-arquivo = arquivos[titulos.index(selecionada)]
+# Categorias disponíveis
+categorias = ["Clássico", "Libertação", "Festivo", "Oração", "Adoração"]
+cifras_por_categoria = {cat: [] for cat in categorias}
 
-# Estilo HTML seguro para fundo escuro/claro
-st.markdown("""
-    <style>
-        .cifra {
-            font-family: monospace;
-            font-size: 15px;
-            background-color: var(--background-color);
-            color: var(--text-color);
-            padding: 20px;
-            border-radius: 8px;
-            white-space: pre-wrap;
-            line-height: 1.6;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-        }
-        .acorde {
-            font-weight: bold;
-            color: #3d8eff;
-        }
-        .secao {
-            font-weight: bold;
-            color: #999;
-        }
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --background-color: #1e1e1e;
-                --text-color: #f2f2f2;
-            }
-        }
-        @media (prefers-color-scheme: light) {
-            :root {
-                --background-color: #f9f9f9;
-                --text-color: #111;
-            }
-        }
-    </style>
-""", unsafe_allow_html=True)
+# Leitura do lista.txt
+with open(ARQUIVO_LISTA, "r", encoding="utf-8") as f:
+    for linha in f:
+        if "|" not in linha:
+            continue
+        titulo, categoria, arquivo = [x.strip() for x in linha.strip().split("|")]
+        if categoria in cifras_por_categoria:
+            cifras_por_categoria[categoria].append((titulo, arquivo))
 
-# Leitura do arquivo
-with open(PASTA_CIFRAS / arquivo, "r", encoding="utf-8") as f:
-    linhas = f.read().splitlines()
+st.set_page_config(page_title="Cifras por Categoria", layout="wide")
+st.markdown("## 🎶 Cifras por Estilo")
 
-# Monta HTML com marcação leve
-html = ""
-for i, linha in enumerate(linhas):
-    linha = linha.strip()
+# Layout em colunas por categoria
+colunas = st.columns(len(categorias))
+for i, cat in enumerate(categorias):
+    with colunas[i]:
+        st.markdown(f"### {cat}")
+        for titulo, arquivo in cifras_por_categoria[cat]:
+            if st.button(titulo, key=f"{cat}-{titulo}"):
+                st.session_state["cifra_selecionada"] = (titulo, arquivo)
 
-    if not linha or linha.startswith("//"):
-        html += "<br>"
-        continue
+# Exibe cifra se selecionada
+if "cifra_selecionada" in st.session_state:
+    titulo, arquivo = st.session_state["cifra_selecionada"]
+    st.markdown(f"---\n### 📄 {titulo}\n")
 
-    if linha.startswith("#"):
-        html += f'<div class="secao">{linha[1:].strip()}</div><br>'
-    elif linha.startswith(">"):
-        acorde = linha[1:].replace(" ", "&nbsp;")
-        html += f'<span class="acorde">{acorde}</span><br>'
-    else:
-        letra = linha.replace(" ", "&nbsp;")
-        html += letra + "<br>"
+    path_arquivo = PASTA_CIFRAS / arquivo
+    if not path_arquivo.exists():
+        st.error(f"O arquivo '{arquivo}' não foi encontrado na pasta 'cifras'.")
+        st.stop()
 
-# Exibir
-st.markdown(f'<div class="cifra">{html}</div>', unsafe_allow_html=True)
+    with open(path_arquivo, "r", encoding="utf-8") as f:
+        linhas = f.read().splitlines()
+
+    # Interpretar marcação com ::
+    blocos = []
+    i = 0
+    while i < len(linhas):
+        linha = linhas[i].strip()
+
+        if not linha or linha.startswith("//"):
+            i += 1
+            continue
+
+        if linha.startswith("#"):
+            blocos.append(("SECAO", linha[1:].strip()))
+            i += 1
+            continue
+
+        if linha.startswith("::"):
+            acorde = ""
+            letra = ""
+            if i + 1 < len(linhas) and linhas[i + 1].strip().startswith(">"):
+                acorde = linhas[i + 1].strip()[1:]
+                i += 1
+            if i + 1 < len(linhas):
+                prox = linhas[i + 1].strip()
+                if prox and not prox.startswith((">", "#", "//", "::")):
+                    letra = prox
+                    i += 1
+            blocos.append(("BLOCO", acorde, letra))
+            i += 1
+            continue
+
+        blocos.append(("LETRA", linha))
+        i += 1
+
+    # Exibição dos blocos formatados
+    for bloco in blocos:
+        if bloco[0] == "SECAO":
+            st.markdown(f"**{bloco[1]}**")
+        elif bloco[0] == "BLOCO":
+            st.markdown(f"```text\n{bloco[1]}\n{bloco[2]}\n```")
+        elif bloco[0] == "LETRA":
+            st.markdown(bloco[1])
