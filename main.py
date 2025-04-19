@@ -33,7 +33,7 @@ st.markdown("""
     <style>
         .cifra {
             font-family: monospace;
-            font-size: 15px;
+            font-size: 13px;
             background-color: var(--background-color);
             color: var(--text-color);
             padding: 20px;
