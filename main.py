@@ -1,22 +1,25 @@
 import streamlit as st
+st.set_page_config(page_title="Cifras por Categoria", layout="wide")
+
 import os
 import pathlib
 
-# Caminho dos arquivos
+# Caminhos
 BASE_DIR = pathlib.Path(__file__).parent
 PASTA_CIFRAS = BASE_DIR / "cifras"
+ARQUIVO_LISTA = BASE_DIR / "lista.txt"
 os.makedirs(PASTA_CIFRAS, exist_ok=True)
 
-ARQUIVO_LISTA = BASE_DIR / "lista.txt"
+# Categorias
+categorias = ["Clássico", "Libertação", "Festivo", "Oração", "Adoração"]
+cifras_por_categoria = {cat: [] for cat in categorias}
+
+# Verifica lista.txt
 if not ARQUIVO_LISTA.exists():
     st.warning("Arquivo 'lista.txt' não encontrado.")
     st.stop()
 
-# Categorias disponíveis
-categorias = ["Clássico", "Libertação", "Festivo", "Oração", "Adoração"]
-cifras_por_categoria = {cat: [] for cat in categorias}
-
-# Leitura do lista.txt
+# Lê a lista
 with open(ARQUIVO_LISTA, "r", encoding="utf-8") as f:
     for linha in f:
         if "|" not in linha:
@@ -25,10 +28,47 @@ with open(ARQUIVO_LISTA, "r", encoding="utf-8") as f:
         if categoria in cifras_por_categoria:
             cifras_por_categoria[categoria].append((titulo, arquivo))
 
-st.set_page_config(page_title="Cifras por Categoria", layout="wide")
+# Estilo HTML (fundo adaptável)
+st.markdown("""
+    <style>
+        .cifra {
+            font-family: monospace;
+            font-size: 15px;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            padding: 20px;
+            border-radius: 8px;
+            white-space: pre-wrap;
+            line-height: 1.6;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .acorde {
+            font-weight: bold;
+            color: #3d8eff;
+        }
+        .secao {
+            font-weight: bold;
+            color: #999;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --background-color: #1e1e1e;
+                --text-color: #f2f2f2;
+            }
+        }
+        @media (prefers-color-scheme: light) {
+            :root {
+                --background-color: #f9f9f9;
+                --text-color: #111;
+            }
+        }
+    </style>
+""", unsafe_allow_html=True)
+
+# Título da página
 st.markdown("## 🎶 Cifras por Estilo")
 
-# Layout em colunas por categoria
+# Colunas por categoria
 colunas = st.columns(len(categorias))
 for i, cat in enumerate(categorias):
     with colunas[i]:
@@ -37,57 +77,30 @@ for i, cat in enumerate(categorias):
             if st.button(titulo, key=f"{cat}-{titulo}"):
                 st.session_state["cifra_selecionada"] = (titulo, arquivo)
 
-# Exibe cifra se selecionada
+# Exibe cifra selecionada com estilo HTML
 if "cifra_selecionada" in st.session_state:
     titulo, arquivo = st.session_state["cifra_selecionada"]
-    st.markdown(f"---\n### 📄 {titulo}\n")
+    st.markdown(f"---\n### 📄 {titulo}")
 
-    path_arquivo = PASTA_CIFRAS / arquivo
-    if not path_arquivo.exists():
+    path = PASTA_CIFRAS / arquivo
+    if not path.exists():
         st.error(f"O arquivo '{arquivo}' não foi encontrado na pasta 'cifras'.")
         st.stop()
 
-    with open(path_arquivo, "r", encoding="utf-8") as f:
+    with open(path, "r", encoding="utf-8") as f:
         linhas = f.read().splitlines()
 
-    # Interpretar marcação com ::
-    blocos = []
-    i = 0
-    while i < len(linhas):
-        linha = linhas[i].strip()
-
+    # Processamento estilo visual
+    html = ""
+    for linha in linhas:
+        linha = linha.strip()
         if not linha or linha.startswith("//"):
-            i += 1
-            continue
+            html += "<br>"
+        elif linha.startswith("#"):
+            html += f'<div class="secao">{linha[1:].strip()}</div><br>'
+        elif linha.startswith(">"):
+            html += f'<span class="acorde">{linha[1:].replace(" ", "&nbsp;")}</span><br>'
+        else:
+            html += linha.replace(" ", "&nbsp;") + "<br>"
 
-        if linha.startswith("#"):
-            blocos.append(("SECAO", linha[1:].strip()))
-            i += 1
-            continue
-
-        if linha.startswith("::"):
-            acorde = ""
-            letra = ""
-            if i + 1 < len(linhas) and linhas[i + 1].strip().startswith(">"):
-                acorde = linhas[i + 1].strip()[1:]
-                i += 1
-            if i + 1 < len(linhas):
-                prox = linhas[i + 1].strip()
-                if prox and not prox.startswith((">", "#", "//", "::")):
-                    letra = prox
-                    i += 1
-            blocos.append(("BLOCO", acorde, letra))
-            i += 1
-            continue
-
-        blocos.append(("LETRA", linha))
-        i += 1
-
-    # Exibição dos blocos formatados
-    for bloco in blocos:
-        if bloco[0] == "SECAO":
-            st.markdown(f"**{bloco[1]}**")
-        elif bloco[0] == "BLOCO":
-            st.markdown(f"```text\n{bloco[1]}\n{bloco[2]}\n```")
-        elif bloco[0] == "LETRA":
-            st.markdown(bloco[1])
+    st.markdown(f'<div class="cifra">{html}</div>', unsafe_allow_html=True)
