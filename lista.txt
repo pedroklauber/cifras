@@ -1,8 +1,3 @@
-<<<<<<< HEAD
 001 - Nunca Pare de Lutar | Libertação | 001 - Nunca pare de Lutar.txt
 002 - Vitorioso És | Adoração |002 - Vitorioso Es.txt
 003 - Esperança | Adoração |003 - Esperança.txt
-=======
-001 - Nunca Pare de Lutar | Libertação | 001 - Nunca pare de Lutar.txt
-002 - Vitorioso És | Adoração |002 - Vitorioso Es.txt
->>>>>>> 2a6fa24939ed9198cbaab697b3ffd082162ad362
