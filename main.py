@@ -64,10 +64,17 @@ st.markdown("""
         }
     </style>
 """, unsafe_allow_html=True)
+<<<<<<< HEAD
 
 # Título da página
 st.markdown("## Cifras por Estilo")
 
+=======
+
+# Título da página
+st.markdown("## 🎶 Cifras por Estilo")
+
+>>>>>>> 2a6fa24939ed9198cbaab697b3ffd082162ad362
 # Colunas por categoria
 colunas = st.columns(len(categorias))
 for i, cat in enumerate(categorias):
