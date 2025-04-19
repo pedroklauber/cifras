@@ -2,11 +2,11 @@ import streamlit as st
 import os
 import pathlib
 
-# Caminho da pasta de cifras
+# Caminho da pasta
 PASTA_CIFRAS = pathlib.Path(__file__).parent / "cifras"
 os.makedirs(PASTA_CIFRAS, exist_ok=True)
 
-# Lista de arquivos
+# Carrega arquivos
 arquivos = [f for f in os.listdir(PASTA_CIFRAS) if f.endswith(".txt")]
 titulos = [f.replace(".txt", "").replace("-", " ").title() for f in arquivos]
 
@@ -15,31 +15,23 @@ if not arquivos:
     st.stop()
 
 # Seleção
-st.markdown("### 🎶 Cifras responsivas com destaque leve")
+st.markdown("### 🎶 Cifras – Visual limpo, leitura clara no celular")
 selecionada = st.selectbox("Escolha a música:", titulos)
 arquivo = arquivos[titulos.index(selecionada)]
 
-# Lê e processa cifra
+# Leitura da cifra
 with open(PASTA_CIFRAS / arquivo, "r", encoding="utf-8") as f:
     linhas = f.read().splitlines()
 
-# Opcional: marcar acordes com *
-import re
+# Quebra a cifra em blocos de 2 linhas: acorde + letra
+blocos = []
+i = 0
+while i < len(linhas):
+    linha1 = linhas[i]
+    linha2 = linhas[i+1] if i + 1 < len(linhas) else ""
+    blocos.append(f"{linha1}\n{linha2}")
+    i += 2 if linha2 else 1
 
-def linha_so_de_acordes(linha):
-    tokens = re.split(r'\s+', linha.strip())
-    if not tokens:
-        return False
-    return all(re.fullmatch(r'[A-G][#b]?(m|maj|min|sus|dim|aug|add)?\d*(/[A-G][#b]?)?', t) for t in tokens if t)
-
-def marcar_acordes(linha):
-    if linha_so_de_acordes(linha):
-        tokens = re.split(r'(\s+)', linha)
-        return ''.join(f'*{t}*' if re.fullmatch(r'[A-G][#b]?(m|maj|min|sus|dim|aug|add)?\d*(/[A-G][#b]?)?', t) else t for t in tokens)
-    return linha
-
-# Aplica marcação
-cifra_formatada = '\n'.join([marcar_acordes(l) for l in linhas])
-
-# Exibe com st.code (melhor para responsividade + modo escuro)
-st.code(cifra_formatada, language="text")
+# Exibição com blocos st.markdown com alinhamento
+for bloco in blocos:
+    st.markdown(f"```text\n{bloco}\n```")
