@@ -1,12 +1,15 @@
-001 - Nunca Pare de Lutar | Libertação | 001 - Nunca pare de Lutar.txt
-002 - Vitorioso És | Adoração |002 - Vitorioso Es.txt
-003 - Esperança | Adoração |003 - Esperança.txt
-004 - Posso Clamar| Libertação |004 - Posso clamar.txt
-005 - Se eu me humilhar| Adoração |005 - Se eu me humilhar.txt
-006 - Romanos 8:26 | Oração |006 - Romanos 8 26.txt
-007 - Deus de obras completas | Adoração |007 - Deus de obras completas.txt
-008 - Eu vou clamar  | Adoração | 008 - Eu vou clamar.txt
-009 - O fogo ardera | Adoração | 009 - O fogo ardera.txt
-010 - É Ele | Adoração | 010 - É Ele.txt
-011 - Onde o fogo não apaga | Adoração | 011 - Onde o fogo não apaga.txt
-012 - Não seremos abalados | Adoração | 012 - Não seremos abalados.txt
+001 - Nunca Pare de Lutar | Quarta | 001 - Nunca pare de Lutar.txt
+002 - Vitorioso És | Domingo |002 - Vitorioso Es.txt
+003 - Esperança | Domingo |003 - Esperança.txt
+004 - Posso Clamar| Quarta |004 - Posso clamar.txt
+005 - Se eu me humilhar| Domingo |005 - Se eu me humilhar.txt
+006 - Romanos 8:26 | Domingo |006 - Romanos 8 26.txt
+007 - Deus de obras completas | Domingo |007 - Deus de obras completas.txt
+008 - Eu vou clamar  | Domingo | 008 - Eu vou clamar.txt
+009 - O fogo ardera | Domingo | 009 - O fogo ardera.txt
+010 - É Ele | Domingo | 010 - É Ele.txt
+011 - Onde o fogo não apaga | Domingo | 011 - Onde o fogo não apaga.txt
+012 - Não seremos abalados | Domingo | 012 - Não seremos abalados.txt
+013 - Portões Celestiais |Domingo| 013 - Portões Celestiais.txt
+014 - Arvore Cortada|Domingo|014 - Arvore Cortada.txt
+015 - Plena Paz (Harpa) |Domingo|015 - Plena Paz (Harpa).txt
