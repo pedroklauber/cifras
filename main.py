@@ -11,7 +11,8 @@ ARQUIVO_LISTA = BASE_DIR / "lista.txt"
 os.makedirs(PASTA_CIFRAS, exist_ok=True)
 
 # Categorias
-categorias = ["Clássico", "Libertação", "Festivo", "Oração", "Adoração"]
+#categorias = ["Clássico", "Libertação", "Festivo", "Oração", "Adoração"]
+categorias = ["Quarta", "Domingo"]
 cifras_por_categoria = {cat: [] for cat in categorias}
 
 # Verifica lista.txt
