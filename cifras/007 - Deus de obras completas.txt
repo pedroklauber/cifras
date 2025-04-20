@@ -23,7 +23,7 @@ Acredito, vai valer a pena esperar
 
 >                 C/E
 Pois eu sirvo um Deus que é tão grande
-> Em
+> Am
 Em apenas um instante
 >         C/G                  Bm7
 Faz o impossível se materializar
@@ -63,6 +63,7 @@ Em apenas um instante
 Faz o impossível se materializar
 
 >G-F#-E-D-E
+5|---5-4-2-0-2
 
 > C7M
 O meu Deus não faz pela metade
@@ -81,7 +82,7 @@ O Deus de obras completas
 Vai fazer cumprir na hora certa
 
 >G-F#-D-E
-
+5|---5-4-2-0-2
 > C
 Não vou temer
 >                            D
@@ -94,13 +95,13 @@ Vai fazer cumprir na hora certa
 
 
 
-> D         C
+>   C
 Meu Deus não falha, não
 >              D/F#
 Eu não vou duvidar
 > G                     Em
 Eu sei que por completo fará
-> D         C
+>  C
 Meu Deus não falha, não
 >              D/F#
 Eu não vou duvidar
@@ -117,9 +118,9 @@ Eu sei que por completo fará
 Meu Deus não falha, não
 >              D/F#
 Eu não vou duvidar
-> G                     Em
+> G                     C      
 Eu sei que por completo fará
-
+sugura C
 
 > C
 Eu vou viver
