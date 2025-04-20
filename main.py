@@ -1,5 +1,35 @@
 import streamlit as st
+import streamlit.components.v1 as components
+
 st.set_page_config(page_title="Cifras por Categoria", layout="wide")
+
+# Mantém a tela ativa em dispositivos compatíveis
+components.html("""
+<script>
+let wakeLock = null;
+
+async function requestWakeLock() {
+  try {
+    wakeLock = await navigator.wakeLock.request('screen');
+    wakeLock.addEventListener('release', () => {
+      console.log('Wake Lock liberado');
+    });
+    console.log('Wake Lock ativo!');
+  } catch (err) {
+    console.error(`${err.name}, ${err.message}`);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  if ('wakeLock' in navigator) {
+    requestWakeLock();
+  } else {
+    console.warn('Wake Lock API não suportada');
+  }
+});
+</script>
+""", height=0)
+
 
 import os
 import pathlib
