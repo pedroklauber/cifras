@@ -7,8 +7,8 @@ Tom: F
 Cortaram a árvore cheia de vida, cortaram  
 > Dm                                 A#  
 E os frutos que ela produzia se acabaram  
-> A#                Gm                      F  
-E chega alguém e diz: acabou a história aqui  
+> A#                Gm                 F  
+E chega alguém e diz: acabou a hist.. aqui  
 
 >            C  
 Mas ainda bem que a resposta vem do céu  
@@ -18,8 +18,8 @@ E a última palavra
 Quem determina ainda é Deus  
 >                       C  
 Alguém diz: só restou raiz  
->                       A#               F  
-Mas Deus diz: tem vida aí, e eu vou restituir!  
+>                       A#          F  
+Mas Deus diz: tem vida aí, e.. restituir!  
 
 >            C  
 Há esperança para a árvore cortada  
@@ -38,10 +38,14 @@ Ainda há esperança, a alegria vai chegar
 E tudo novamente irá voltar ao seu lugar  
 >                    A#  
 A água já está presente, e vai começar regar  
->                           F  
-Vai ser tão lindo o testemunho que você irá contar  
->                       A#                       C  
-Eu fui uma árvore cortada, mas ao cheiro das águas  
+>                   F                     
+Vai ser ....testemunho que você irá contar  
+>                       A#               C  
+Eu fui uma árvore cortada, mas ...das águas  
+
+>                     C 
+mas ao cheiro das águas
+
 >                         F  
 Vi Deus minha vida restaurar  
 
@@ -53,8 +57,8 @@ E a última palavra
 Quem determina ainda é Deus  
 >                       C  
 Alguém diz: só restou raiz  
->                       A#               F  
-Mas Deus diz: tem vida aí, e eu vou restituir!  
+>                       A#            F  
+Mas Deus diz: tem vida aí, e...restituir!  
 
 >            C  
 Ainda há esperança para a árvore cortada  
@@ -74,9 +78,9 @@ E tudo novamente irá voltar ao seu lugar
 >                    A#  
 A água já está presente, e vai começar regar  
 >                           F  
-Vai ser tão lindo o testemunho que você irá contar  
->                       A#                       C  
-Eu fui uma árvore cortada, mas ao cheiro das águas  
+Vai ser tão lindo o testemunho....irá contar  
+>                       A#                 C  
+Eu fui uma árvore cortada, mas.... das águas  
 >                         F  
 Vi Deus minha vida restaurar  
 
@@ -95,8 +99,11 @@ E toda vez que eu escutava alguém dizer
 Até tinha estrutura, mas veio a morrer  
 >   Gm  
 E lembrava da promessa pra não desanimar  
->      F        C            A#         Dm           C  
-Essa promessa me dizia, está promessa me garantia  
+>      F        C            
+Essa promessa me dizia, 
+
+    A#         Dm           C  
+está promessa me garantia
 
 >                C  
 Que ainda há esperança para a árvore cortada  
@@ -116,8 +123,8 @@ E tudo novamente irá voltar ao seu lugar
 >                    A#  
 A água já está presente, e vai começar regar  
 >                           F  
-Vai ser tão lindo o testemunho que você irá contar  
->                       A#                       C  
-Eu fui uma árvore cortada, mas ao cheiro das águas  
+Vai ser tão lindo o testemunho....irá contar  
+>                       A#               C  
+Eu fui uma árvore cortada, mas ..... águas  
 >                              F  
 Vi  minha família Deus salvar
