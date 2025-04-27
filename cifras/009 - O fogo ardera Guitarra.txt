@@ -56,13 +56,30 @@ Entregar minha vida como adoração
 
 > F  G  C/E  Am7
 
-[Pré-Refrão]
+e --------------|--------------|-------------
+B ------------5-|-------5------|-------------
+G --------------|-----------7--|-(3x)--------
+D --5--7--5-----|-5--7---------|-------------
+A --------------|--------------|-------------
+E --------------|--------------|-------------
+
+
+[Pré-Refrão] P1
 > F                  
 Que o nosso louvor 
 >               G
 Não seja um momento
 >            C/E            Am7
 Lágrimas vazias, sem avivamento
+
+[Pré-Refrão] P1
+e ----------------------------------
+B ----8-8---------------------------
+G ---------5-5---7-7--5-5-----------
+D ----------------------------------
+A ----------------------------------
+E ----------------------------------
+
 >              F               G
 Que o nosso amor não seja fingido
 >                C/E     
@@ -70,46 +87,83 @@ Honrado com os lábios
 >                   Am7
 Nos corações esquecido 
 
+
 [Segundo Refrão]
-> F
+>                     F9
 Pois de que vale ter as
-> G
 Poesias mais lindas
->        Am7           G/B
+>        G7          G/B
 As harmonias mais brilhantes
->             F
+>     Am              C/E        
 Se não há verdade em nós?
 
-> F
+
+> 
 Pois de que vale ter
-> G
+> F9
 Tudo e não ter nada? 
->             C
+>             G7
 Te dar meus lábios, não minha alma?
->                           C/E
+>                       C    C/E
 Eu quero me entregar a Ti
 Entregar minha vida como adoração
 
-> F
+
+[Refrão] P1
+e ----------------------------------
+B ----8-8-------------------------12
+G ---------5-5---7-7--5-5--(3x)---12-
+D ----------------------------------
+A ----------------------------------
+E ----------------------------------
+
+[Refrão] 
+e ----------------------------------
+B -----------8--8--8--------12--13--12
+G ----7h9----9--9--9--(2x)--12--12--12
+D ----------------------------------
+A ----------------------------------
+E ----------------------------------
+
+[Refrão] 
+e ---------------|-10---|----------/10---
+B ---10--10 ~ ---|----8-|---6--5---------
+G ---------------|------|-------------
+D ---------------|------|-------------
+A ---------------|------|-------------
+E ---------------|------|-------------
+
+[Refrão] Não vale a pena só me emocionar
+e --8--8---4x----12--|-8--10---|-------------
+B ---8---8-~- 8-----|8-8------|-------------
+G ---------------|------|-------------
+
+
+
+
+
+>                         F
 Não vale a pena só me emocionar
 E buscar as canções mais
->        G
+>                G
 Lindas pra cantar 
->         C
+>      
 Se eu não for uma canção 
+    C
 Que alegra a Ti
->                          Em
+>                     Em
 Se o meu coração não queimar por Ti
 
-> F
+>                         F
 Não vale a pena só me emocionar
-E buscar as canções mais lindas 
->        G
-Pra cantar
->         C
+E buscar as canções mais
+>                G
+Lindas pra cantar 
+>      
 Se eu não for uma canção 
+    C
 Que alegra a Ti
->                          Em
+>                     Em
 Se o meu coração não queimar por Ti
 
 > F  G  C  Em
@@ -118,24 +172,42 @@ Se o meu coração não queimar por Ti
 [Segunda Parte]
 > Am7
 E o fogo arderá sobre o altar
+>                       C/E
 Continuamente sobre o altar
 > G  Em
 E não se apagará
 
 > Am7
 E o fogo arderá sobre o altar
+>                       C/E
 Continuamente sobre o altar
 > G  Em
 E não se apagará
 
 > Am7
 E o fogo arderá sobre o altar
+>                       C/E
 Continuamente sobre o altar
 > G  Em
 E não se apagará
 
 > Am7
 E o fogo arderá sobre o altar
+>                       C/E
+Continuamente sobre o altar
+> G  Em
+E não se apagará
+
+> Am7
+E o fogo arderá sobre o altar
+>                       C/E
+Continuamente sobre o altar
+> G  Em
+E não se apagará
+
+> Am7
+E o fogo arderá sobre o altar
+>                       C/E
 Continuamente sobre o altar
 > G  Em
 E não se apagará
@@ -153,22 +225,21 @@ Honrado com os lábios
 Nos corações esquecido 
 
 [Refrão Final]
-> F9
+>                     F9
 Pois de que vale ter as
-> G4
-Poesias mais lindas 
->        Am7               G/B
+Poesias mais lindas
+>        G7          G/B
 As harmonias mais brilhantes
->             C    C/E            
+>     Am              C/E        
 Se não há verdade em nós?
 
-> F9
+> 
 Pois de que vale ter
-> G4
+> F9
 Tudo e não ter nada? 
->             C
+>             G7
 Te dar meus lábios, não minha alma?
->                           C/E
+>               C    C/E
 Eu quero me entregar a Ti
 Entregar minha vida como adoração
 
