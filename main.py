@@ -80,6 +80,7 @@ st.markdown("""
         .secao {
             font-weight: bold;
             color: #999;
+            font-size: 20px;
         }
         @media (prefers-color-scheme: dark) {
             :root {
